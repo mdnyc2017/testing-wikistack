@@ -1,11 +1,27 @@
-const expect = require('chai').expect;
-const Doubler = require('../')
+var expect = require('chai').expect;
 
 
-describe('doubler', () =>{
-    it('adds two plus two and returns 4', () =>{
-        expect(doubler(2,2)).to.be(4)
-    })
+1.
+// describe('Testing suite capabilities', function () {
+//   it('confirms basic arithmetic', function () {
+//     expect(2+2).to.equal(4);
+//   });
+// });
 
 
-})
+2.
+
+
+
+
+// describe('User', function() {
+//     describe('#save()', function() {
+//       it('should save without error', function(done) {
+//         var user = new User('Luna');
+//         user.save(function(err) {
+//           if (err) done(err);
+//           else done();
+//         });
+//       });
+//     });
+//   });
