@@ -110,41 +110,67 @@ describe('Page model', function () {
 
       describe('Instance methods', function () {
         before(function (done) {
-            let page1 = Page.create({
+            Page.create({
               title: 'baseTitle',
               content: 'base',
               tags: ['shared', 'base']
             })
             .then(function () {
-              done();
             })
-            .catch(done);
+            .catch();
 
-          let page2 = Page.create({
+          Page.create({
             title: 'sharedTitle',
             content: 'sharing',
             tags: ['shared', 'second']
           })
           .then(function () {
-            done();
           })
-          .catch(done);
+          .catch();
 
-        let page3 = Page.create({
+        Page.create({
             title: 'lastTitle',
             content: 'last',
             tags: ['last']
           })
           .then(function () {
-            done();
           })
-          .catch(done);
+          .catch();
 
+          done()
         });
         describe('findSimilar', function () {
-            page2.findSimilar()
-          it('never gets itself');
-          it('gets other pages with any common tags');
+         
+          it('never gets itself', function(done){
+            Page.findByTag('last')
+            .then(function(p){              
+              return p.findSimilar()
+            })
+            .then(function(p) {
+              console.log('success!')
+            })
+           .catch(function(p){
+            expect(p).to.have.lengthOf(0);   
+            done(); 
+           })
+          });
+
+          xit('gets other pages with any common tags',function(){
+            Page.findByTag('shared')
+            .then(function(p){
+              // console.log('p is :', p)
+              let page1 =p[0],
+                  page2 = p[1];
+                  console.log('page1 is :', page1)
+                  
+              return page1.findSimilar()
+            })
+           .then(function(p){
+            expect(p).to.have.lengthOf(1);
+            done();
+           })
+           .catch(done)
+          });
           it('does not get other pages without any common tags');
         });
       });
